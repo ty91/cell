@@ -3,11 +3,11 @@ import chalk from "chalk";
 import { Agent } from "@mariozechner/pi-agent-core";
 import { getModels, getProviders, type KnownProvider } from "@mariozechner/pi-ai";
 import { Container, Editor, ProcessTerminal, Text, TUI, matchesKey } from "@mariozechner/pi-tui";
+import { buildSystemPrompt } from "./system-prompt.js";
 
 const providerName = process.env.CELL_PROVIDER ?? "openrouter";
 const modelName = process.env.CELL_MODEL ?? "openrouter/auto";
-const systemPrompt =
-	process.env.CELL_SYSTEM_PROMPT ?? "You are a concise terminal assistant. Keep responses short and helpful.";
+const systemPrompt = buildSystemPrompt();
 
 const availableProviders = getProviders();
 const providerNameTyped = providerName as KnownProvider;
